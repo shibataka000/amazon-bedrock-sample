@@ -1,1 +1,1 @@
-# amazon-bedrock-sample
+# Amazon Bedrock Sample
