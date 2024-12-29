@@ -35,6 +35,3 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
-# Ignore sample data
-knowledge-base/terraform/sample.csv

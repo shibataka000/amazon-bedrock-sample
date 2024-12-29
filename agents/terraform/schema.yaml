@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: GetWeather API
+  version: 1.0.0
+  description: gets weather
+paths:
+  /getWeather/{location}/:
+    get:
+      summary: gets weather in Celsius
+      description: gets weather in Celsius
+      operationId: getWeather
+      parameters:
+        - name: location
+          in: path
+          description: location name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: weather in Celsius
+          content:
+            application/json:
+              schema:
+                type: string
