@@ -179,9 +179,8 @@ func main() {
 	}
 
 	modelID := "arn:aws:bedrock:ap-northeast-1::foundation-model/amazon.titan-text-express-v1"
-	inputText := "何か面白い話を100文字以内で教えてください。"
-	body := fmt.Sprintf(`{"inputText": "%s"}`, inputText)
-	contentText := inputText
+	body := `{"inputText": ""何か面白い話を100文字以内で教えてください。""}`
+	contentText := "何か面白い話を100文字以内で教えてください。"
 
 	fmt.Println("InvokeModel")
 	invokeModelResponse, err := client.invokeModel(ctx, modelID, body)
