@@ -1,16 +1,16 @@
 def lambda_handler(event, context):
 
+    print(event)
+
     agent = event['agent']
     actionGroup = event['actionGroup']
     api_path = event['apiPath']
-    # get parameters
     get_parameters = event.get('parameters', [])
-    # post parameters
-    post_parameters = event['requestBody']['content']['application/json']['properties']
+    # post_parameters = event['requestBody']['content']['application/json']['properties']
 
     response_body = {
         'application/json': {
-            'body': "sample response"
+            'body': "20"
         }
     }
 

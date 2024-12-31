@@ -1,4 +1,4 @@
-module github.com/shibataka000/agents/client
+module github.com/shibataka000/amazon-bedrock-sample/agents/application
 
 go 1.23.0
 

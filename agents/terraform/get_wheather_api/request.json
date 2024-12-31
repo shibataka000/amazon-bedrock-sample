@@ -1,0 +1,23 @@
+{
+    "actionGroup": "GetWeatherAPI",
+    "agent": {
+        "alias": "TSTALIASID",
+        "id": "DIE1YVL6V1",
+        "name": "wheather-forecaster",
+        "version": "DRAFT"
+    },
+    "apiPath": "/getWeather/{location}/",
+    "httpMethod": "GET",
+    "inputText": "東京の気温を教えてください。",
+    "messageVersion": "1.0",
+    "parameters": [
+        {
+            "name": "location",
+            "type": "string",
+            "value": "Tokyo"
+        }
+    ],
+    "promptSessionAttributes": {},
+    "sessionAttributes": {},
+    "sessionId": "TSTSESSIONID"
+}
