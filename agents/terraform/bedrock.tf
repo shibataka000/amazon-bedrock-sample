@@ -6,7 +6,7 @@ resource "aws_bedrockagent_agent" "wheather_forecaster" {
 }
 
 data "aws_bedrock_foundation_model" "wheather_forecaster" {
-  model_id = var.wheather_forecaster_foundation_model_id
+  model_id = var.foundation_model_id
 }
 
 resource "aws_bedrockagent_agent_action_group" "get_wheather_api" {
