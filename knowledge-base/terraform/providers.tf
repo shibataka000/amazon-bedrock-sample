@@ -1,6 +1,6 @@
 provider "aws" {}
 
 provider "opensearch" {
-  url         = aws_opensearchserverless_collection.bedrock_knowledge_base.collection_endpoint
+  url         = aws_opensearchserverless_collection.library.collection_endpoint
   healthcheck = false
 }

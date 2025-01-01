@@ -1,10 +1,10 @@
-resource "aws_bedrockagent_knowledge_base" "example" {
-  name     = "example"
-  role_arn = aws_iam_role.amazon_bedrock_execution_role_for_knowledge_base.arn
+resource "aws_bedrockagent_knowledge_base" "library" {
+  name     = "library"
+  role_arn = aws_iam_role.library.arn
 
   knowledge_base_configuration {
     vector_knowledge_base_configuration {
-      embedding_model_arn = data.aws_bedrock_foundation_model.embedding.model_arn
+      embedding_model_arn = data.aws_bedrock_foundation_model.library.model_arn
     }
     type = "VECTOR"
   }
@@ -12,8 +12,8 @@ resource "aws_bedrockagent_knowledge_base" "example" {
   storage_configuration {
     type = "OPENSEARCH_SERVERLESS"
     opensearch_serverless_configuration {
-      collection_arn    = aws_opensearchserverless_collection.bedrock_knowledge_base.arn
-      vector_index_name = opensearch_index.bedrock_knowledge_base_default_index.name
+      collection_arn    = aws_opensearchserverless_collection.library.arn
+      vector_index_name = opensearch_index.library.name
       field_mapping {
         vector_field   = local.aoss_vector_field_name
         text_field     = local.aoss_text_field_name
@@ -23,19 +23,19 @@ resource "aws_bedrockagent_knowledge_base" "example" {
   }
 }
 
-resource "aws_bedrockagent_data_source" "example" {
-  name                 = "example"
-  knowledge_base_id    = aws_bedrockagent_knowledge_base.example.id
+data "aws_bedrock_foundation_model" "library" {
+  model_id = var.embedding_model_id
+}
+
+resource "aws_bedrockagent_data_source" "books" {
+  name                 = "books"
+  knowledge_base_id    = aws_bedrockagent_knowledge_base.library.id
   data_deletion_policy = "RETAIN"
 
   data_source_configuration {
     type = "S3"
     s3_configuration {
-      bucket_arn = aws_s3_bucket.bedrock_knowledge_base_data_source.arn
+      bucket_arn = aws_s3_bucket.books.arn
     }
   }
-}
-
-data "aws_bedrock_foundation_model" "embedding" {
-  model_id = var.embedding_model_id
 }

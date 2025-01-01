@@ -1,13 +1,15 @@
-resource "aws_opensearchserverless_collection" "bedrock_knowledge_base" {
+resource "aws_opensearchserverless_collection" "library" {
   name = local.aoss_collection_name
   type = "VECTORSEARCH"
 
   depends_on = [
-    aws_opensearchserverless_security_policy.bedrock_knowledge_base_encryption
+    aws_opensearchserverless_security_policy.library_encryption,
+    aws_opensearchserverless_security_policy.library_network,
+    aws_opensearchserverless_access_policy.library,
   ]
 }
 
-resource "aws_opensearchserverless_security_policy" "bedrock_knowledge_base_encryption" {
+resource "aws_opensearchserverless_security_policy" "library_encryption" {
   name = local.aoss_collection_name
   type = "encryption"
   policy = jsonencode({
@@ -23,7 +25,7 @@ resource "aws_opensearchserverless_security_policy" "bedrock_knowledge_base_encr
   })
 }
 
-resource "aws_opensearchserverless_security_policy" "bedrock_knowledge_base_network" {
+resource "aws_opensearchserverless_security_policy" "library_network" {
   name = local.aoss_collection_name
   type = "network"
   policy = jsonencode([{
@@ -45,7 +47,7 @@ resource "aws_opensearchserverless_security_policy" "bedrock_knowledge_base_netw
   }])
 }
 
-resource "aws_opensearchserverless_access_policy" "bedrock_knowledge_base" {
+resource "aws_opensearchserverless_access_policy" "library" {
   name = local.aoss_collection_name
   type = "data"
   policy = jsonencode([{
@@ -77,13 +79,13 @@ resource "aws_opensearchserverless_access_policy" "bedrock_knowledge_base" {
       }
     ],
     "Principal" = [
-      aws_iam_role.amazon_bedrock_execution_role_for_knowledge_base.arn,
+      aws_iam_role.library.arn,
       data.aws_caller_identity.current.arn,
     ],
   }])
 }
 
-resource "opensearch_index" "bedrock_knowledge_base_default_index" {
+resource "opensearch_index" "library" {
   name                           = "bedrock-knowledge-base-default-index"
   number_of_shards               = "2"
   number_of_replicas             = "0"
@@ -124,4 +126,8 @@ resource "opensearch_index" "bedrock_knowledge_base_default_index" {
       mappings
     ]
   }
+
+  depends_on = [
+    aws_opensearchserverless_collection.library,
+  ]
 }

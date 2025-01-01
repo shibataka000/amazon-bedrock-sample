@@ -36,9 +36,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# Ignore AWS Lambda deploy packages
-*.zip
-
 # If you prefer the allow list template instead of the deny list, see community template:
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
 #
@@ -64,3 +61,10 @@ go.work.sum
 
 # env file
 .env
+
+# Ignore AWS Lambda deploy packages
+*.zip
+
+# Ignore books which are data sources of knowledge base
+knowledge-base/terraform/books/*
+!knowledge-base/terraform/books/.gitkeep

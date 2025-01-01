@@ -1,9 +1,11 @@
 variable "embedding_model_id" {
-  type    = string
-  default = "amazon.titan-embed-text-v1"
+  default     = "amazon.titan-embed-text-v1"
+  description = "The foundation model ID for the library knowledge base."
+  type        = string
 }
 
 variable "dimension" {
-  type    = number
-  default = 1536
+  default     = 1536
+  description = "The dimension for the library knowledge base."
+  type        = number
 }
