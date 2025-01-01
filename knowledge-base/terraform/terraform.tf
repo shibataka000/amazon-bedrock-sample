@@ -4,6 +4,9 @@ terraform {
     aws = {
       source = "hashicorp/aws"
     }
+    awscc = {
+      source = "hashicorp/awscc"
+    }
     opensearch = {
       source = "opensearch-project/opensearch"
     }
